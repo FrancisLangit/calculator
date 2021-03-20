@@ -25,5 +25,22 @@ class Calculator {
     }
 }
 
-let calculator = new Calculator;
-console.log(calculator.divide(1, 12))
+class UserInterface {
+    constructor() {
+        this.calculator = new Calculator;
+    }
+
+    trackInputButtons() {
+        let buttons = document.querySelectorAll(".calc-input-btn")
+        for (let i = 0; i < buttons.length; i++) {
+            console.log(buttons[i].textContent);
+        }
+    }
+
+    populateDisplay() {
+        document.getElementByID('calc-display');
+    }
+}
+
+userInterface = new UserInterface;
+userInterface.trackInputButtons();

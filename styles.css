@@ -1,4 +1,4 @@
-.calc-grid {
+.calc {
     background: grey;
     display: grid;
     grid-gap: 10px;
@@ -9,16 +9,17 @@
     width: 250px;
 }
 
-.calc-grid div {
+.calc div {
     align-items: center;
     background: white;
     border-style: solid;
     display: flex;
     justify-content: center;
+    user-select: none;
 }
 
-.calc-display {
-    grid-column: 1 / 5;
+.calc div:not(#calc-display):active{
+    background: rgb(192, 192, 192);
 }
 
 .calc-clear-btn {
@@ -27,4 +28,8 @@
 
 .calc-delete-btn {
     grid-column: 3 / 5;
+}
+
+#calc-display {
+    grid-column: 1 / 5;
 }
