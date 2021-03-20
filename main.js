@@ -31,16 +31,22 @@ class UserInterface {
     }
 
     trackInputButtons() {
-        let buttons = document.querySelectorAll(".calc-input-btn")
-        for (let i = 0; i < buttons.length; i++) {
-            console.log(buttons[i].textContent);
+        /**Adds event listener to .calc-input-btn divs. Such divs now add
+         * their text content to #calc-display div when clicked.*/
+        let calcDisplay = document.getElementById('calc-display');
+        let inputButtons = document.querySelectorAll(".calc-input-btn");
+        for (let i = 0; i < inputButtons.length; i++) {
+            inputButtons[i].addEventListener("click", () => {
+                calcDisplay.textContent += inputButtons[i].textContent;
+            })
         }
     }
 
-    populateDisplay() {
-        document.getElementByID('calc-display');
+    setUp() {
+        /**Calls all functions in UserInterface class.*/
+        this.trackInputButtons();
     }
 }
 
 userInterface = new UserInterface;
-userInterface.trackInputButtons();
+userInterface.setUp();

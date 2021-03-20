@@ -10,15 +10,18 @@
 }
 
 .calc div {
-    align-items: center;
     background: white;
     border-style: solid;
-    display: flex;
-    justify-content: center;
     user-select: none;
 }
 
-.calc div:not(#calc-display):active{
+.calc div:not(#calc-display) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calc div:not(#calc-display):active {
     background: rgb(192, 192, 192);
 }
 
