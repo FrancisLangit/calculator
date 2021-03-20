@@ -28,22 +28,32 @@ class Calculator {
 class UserInterface {
     constructor() {
         this.calculator = new Calculator;
+        this.calcDisplay = document.getElementById('calc-display'); 
+    }
+
+    trackClearButton() {
+        /**Adds event listener to #calc-clear-btn div. When such is clicked it
+         * now empties the calculator's display window. */
+        let clearButton = document.getElementById('calc-clear-btn');
+        clearButton.addEventListener("click", () => {
+            this.calcDisplay.textContent = "";
+        });
     }
 
     trackInputButtons() {
         /**Adds event listener to .calc-input-btn divs. Such divs now add
          * their text content to #calc-display div when clicked.*/
-        let calcDisplay = document.getElementById('calc-display');
         let inputButtons = document.querySelectorAll(".calc-input-btn");
         for (let i = 0; i < inputButtons.length; i++) {
             inputButtons[i].addEventListener("click", () => {
-                calcDisplay.textContent += inputButtons[i].textContent;
-            })
+                this.calcDisplay.textContent += inputButtons[i].textContent;
+            });
         }
     }
 
     setUp() {
         /**Calls all functions in UserInterface class.*/
+        this.trackClearButton();
         this.trackInputButtons();
     }
 }
