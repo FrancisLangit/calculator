@@ -66,7 +66,7 @@ class UserInterface {
          * this.firstNum and this.waitingForSecondNum to default values.*/
         const clearButton = document.getElementsByClassName('calc-ac-btn')[0];
         clearButton.addEventListener('click', () => {
-            this.calcDisplay.textContent = '';
+            this.calcDisplay.textContent = '0';
             this.operator = '';
             this.firstNum = '';
             this.waitingForSecondNum = false;
@@ -75,12 +75,15 @@ class UserInterface {
 
     setUpClearButton() {
         /**Adds event listener to .calc-c-btn div. If clicked it removes
-         * one character from calculator's display window. */
+         * one character from calculator's display window if such not just
+         * displaying 0. */
         const deleteButton = document.getElementsByClassName('calc-c-btn')[0];
         deleteButton.addEventListener('click', () => {
-            const oldNum = this.calcDisplay.textContent;
-            const newNum = oldNum.substring(0, oldNum.length - 1);
-            this.calcDisplay.textContent = newNum;
+            if (this.calcDisplay.textContent !== '0') {
+                const oldNum = this.calcDisplay.textContent;
+                const newNum = oldNum.substring(0, oldNum.length - 1);
+                this.calcDisplay.textContent = newNum;
+            }
         });
     }
 
@@ -108,7 +111,9 @@ class UserInterface {
                     this.calcDisplay.textContent = '';
                     this.waitingForSecondNum = false;
                 }
-                this.calcDisplay.textContent += inputButtons[i].textContent;
+                const newNum = (this.calcDisplay.textContent + 
+                    inputButtons[i].textContent);
+                this.calcDisplay.textContent = newNum.replace(/^0+/, '');
             });
         }
     }
