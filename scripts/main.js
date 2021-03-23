@@ -43,7 +43,7 @@ class Calculator {
 class UserInterface {
     constructor() {
         this.calculator = new Calculator;
-        this.calcDisplay = document.getElementById('calc-display');
+        this.calcDisplay = document.getElementsByClassName('calc-display')[0];
         
         this.operator = '';
         this.firstNum = '';
@@ -54,7 +54,7 @@ class UserInterface {
         /**Adds event listener to #calc-ac-btn div. When such is clicked it
          * empties the calculator's display window and resets this.operator,
          * this.firstNum and this.waitingForSecondNum to default values.*/
-        const clearButton = document.getElementById('calc-ac-btn');
+        const clearButton = document.getElementsByClassName('calc-ac-btn')[0];
         clearButton.addEventListener('click', () => {
             this.calcDisplay.textContent = '';
             this.operator = '';
@@ -66,7 +66,7 @@ class UserInterface {
     setUpClearButton() {
         /**Adds event listener to #calc-c-btn div. If clicked it removes
          * one character from calculator's display window. */
-        const deleteButton = document.getElementById('calc-c-btn');
+        const deleteButton = document.getElementsByClassName('calc-c-btn')[0];
         deleteButton.addEventListener('click', () => {
             const oldText = this.calcDisplay.textContent;
             const newText = oldText.substring(0, oldText.length - 1);
@@ -122,7 +122,8 @@ class UserInterface {
     setUpEqualsButton() {
         /**Adds event listener to #calc-equals-btn div. Calls displayResult()
          * if first number already inputted. Also resets this.firstNum.*/
-        const equalsButton = document.getElementById("calc-equals-btn");
+        const equalsButton = document.getElementsByClassName(
+            "calc-equals-btn")[0];
         equalsButton.addEventListener('click', () => {
             if (this.firstNum !== '') {
                 this.displayResult();
@@ -134,9 +135,9 @@ class UserInterface {
     addClearButtonsKeyboardSupport(e) {
         /**Adds keyboard support for clear buttons AC and C.*/
         if (e.key === "Delete") {
-            document.getElementById("calc-ac-btn").click();
+            document.getElementsByClassName("calc-ac-btn")[0].click();
         } else if (e.key === "Backspace") {
-            document.getElementById("calc-c-btn").click();
+            document.getElementsByClassName("calc-c-btn")[0].click();
         }
     }
 
