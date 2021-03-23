@@ -21,9 +21,6 @@ class Calculator {
 
     operate(operator, a, b) {
         /**Returns value after operating on a and b dependent on operator.*/
-        a = parseFloat(a);
-        b = parseFloat(b);
-        
         let result;
         switch(operator) {
             case '+':
@@ -51,6 +48,7 @@ class UserInterface {
         this.operator = '';
         this.firstNum = '';
         this.secondNum = '';
+        this.waitingForSecondNum = false;
     }
 
     setUpClearButton() {
@@ -79,16 +77,24 @@ class UserInterface {
         const inputButtons = document.querySelectorAll('.calc-input-btn');
         for (let i = 0; i < inputButtons.length; i++) {
             inputButtons[i].addEventListener('click', () => {
-                const input = inputButtons[i].textContent
-
-                if (this.firstNum === '') {
-                    this.calcDisplay.textContent += input;
-                } else if (this.firstNum !== '') {
+                if (this.waitingForSecondNum) {
                     this.calcDisplay.textContent = '';
-                    this.calcDisplay.textContent += input;
+                    this.waitingForSecondNum = false;
                 }
+                this.calcDisplay.textContent += inputButtons[i].textContent;
             });
         }
+    }
+
+    displayResult() {
+        // this.calcDisplay.textContent = this.calculator.operate(
+        //     this.operator, 
+        //     parseFloat(this.firstNum), 
+        //     parseFloat(this.calcDisplay.textContent),
+        // );
+        // this.operator = '';
+        // this.firstNum = this.calcDisplay.textContent;
+        // this.waitingForSecondNum = true;
     }
 
     setUpOperatorButtons() {
@@ -96,10 +102,23 @@ class UserInterface {
             '.calc-operator-btn');
         for (let i = 0; i < operatorButtons.length; i++) {
             operatorButtons[i].addEventListener('click', () => {
-                if (this.firstNum === '') {
-                    this.operator = operatorButtons[i].textContent;
-                    this.firstNum = this.calcDisplay.textContent;
-                    console.log(this.firstNum, this.operator);
+                if (this.calcDisplay.textContent !== '') {
+                    if (this.firstNum === '') {
+                        this.operator = operatorButtons[i].textContent;
+                        this.firstNum = this.calcDisplay.textContent;
+                        this.waitingForSecondNum = true;
+                    } else if (this.firstNum !== '') {
+                        this.secondNum = this.calcDisplay.textContent;
+                        this.calcDisplay.textContent = this.calculator.operate(
+                            this.operator,
+                            parseFloat(this.firstNum),
+                            parseFloat(this.secondNum),
+                        );
+                        this.firstNum = this.calcDisplay.textContent;
+                        this.secondNum = '';
+                        this.waitingForSecondNum = true;
+                        this.operator = operatorButtons[i].textContent;
+                    }
                 }
             });
         }
@@ -108,17 +127,15 @@ class UserInterface {
     setUpEqualsButton() {
         const equalsButton = document.getElementById("calc-equals-btn");
         equalsButton.addEventListener('click', () => {
-            if (this.firstNum !== '' && this.secondNum === '') {
-                this.secondNum = this.calcDisplay.textContent;
-                let result = this.calculator.operate(
-                    this.operator, this.firstNum, this.secondNum);
-                this.calcDisplay.textContent = result; 
-            }
+            // if (this.firstNum !== '') {
+            //     this.displayResult();
+            // }
         });
     }
 
     setUp() {
-        /**Calls all methods in UserInterface class.*/
+        /**Calls methods in UserInterface class associated with setting up
+         * buttons on calculator user interface.*/
         this.setUpClearButton();
         this.setUpDeleteButton();
         this.setUpInputButtons();
