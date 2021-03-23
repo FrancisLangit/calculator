@@ -36,3 +36,8 @@
 #calc-delete-btn {
     grid-column: 3 / 5;
 }
+
+#device-container{
+    display: flex;
+    justify-content: center;
+}

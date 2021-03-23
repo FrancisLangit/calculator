@@ -3,36 +3,53 @@
         <title>
             Calculator
         </title>
-        <link rel="stylesheet" href="styles.css">
-        <script src="main.js" async></script>
+        <link rel="stylesheet" href="styles/devices.min.css" type="text/css">        
+        <link rel="stylesheet" href="styles/styles.css" type="text/css">
+        <script src="scripts/main.js" async></script>
     </head>
 
-    <body>
-        <div class="calc">
-            <div id="calc-display"></div>
+    <body>					
+        <div id="device-container">
+            <div class="marvel-device iphone8 black">
+                <div class="top-bar"></div>
+                <div class="sleep"></div>
+                <div class="volume"></div>
+                <div class="camera"></div>
+                <div class="sensor"></div>
+                <div class="speaker"></div>
+                <div class="screen">
 
-            <div id="calc-clear-btn">Clear</div>
-            <div id="calc-delete-btn">Backspace</div>
+                    <div class="calc">
+                        <div id="calc-display"></div>
+            
+                        <div id="calc-clear-btn">Clear</div>
+                        <div id="calc-delete-btn">Backspace</div>
+            
+                        <div class="calc-input-btn">7</div>
+                        <div class="calc-input-btn">8</div>
+                        <div class="calc-input-btn">9</div>
+                        <div class="calc-operator-btn">/</div>
+            
+                        <div class="calc-input-btn">4</div>
+                        <div class="calc-input-btn">5</div>
+                        <div class="calc-input-btn">6</div>
+                        <div class="calc-operator-btn">*</div>
+            
+                        <div class="calc-input-btn">1</div>
+                        <div class="calc-input-btn">2</div>
+                        <div class="calc-input-btn">3</div>
+                        <div class="calc-operator-btn">-</div>
+            
+                        <div class="calc-input-btn">.</div>
+                        <div class="calc-input-btn">0</div>
+                        <div id="calc-equals-btn">=</div>
+                        <div class="calc-operator-btn">+</div>
+                    </div>
 
-            <div class="calc-input-btn">7</div>
-            <div class="calc-input-btn">8</div>
-            <div class="calc-input-btn">9</div>
-            <div class="calc-operator-btn">/</div>
-
-            <div class="calc-input-btn">4</div>
-            <div class="calc-input-btn">5</div>
-            <div class="calc-input-btn">6</div>
-            <div class="calc-operator-btn">*</div>
-
-            <div class="calc-input-btn">1</div>
-            <div class="calc-input-btn">2</div>
-            <div class="calc-input-btn">3</div>
-            <div class="calc-operator-btn">-</div>
-
-            <div class="calc-input-btn">.</div>
-            <div class="calc-input-btn">0</div>
-            <div id="calc-equals-btn">=</div>
-            <div class="calc-operator-btn">+</div>
-        </div>
+                </div>
+                <div class="home"></div>
+                <div class="bottom-bar"></div>
+            </div>
+        </div>                       
     </body>
 </html>
