@@ -131,14 +131,28 @@ class UserInterface {
         });
     }
 
+    addKeyboardSupport() {
+        /**Adds keydown event listeners to body. If key pressed equal to text
+         * content of button, simulate such button being clicked. */
+        document.body.addEventListener('keydown', (e) => {
+            const buttons = document.querySelectorAll('div.calc > div');
+            for (let i = 0; i < buttons.length; i++) {
+                if (e.key === buttons[i].textContent) {
+                    buttons[i].click();
+                } 
+            }
+        });
+    }
+
     setUp() {
         /**Calls methods in UserInterface class associated with setting up
-         * buttons on calculator user interface.*/
+         * user interface.*/
         this.setUpClearButton();
         this.setUpDeleteButton();
         this.setUpInputButtons();
         this.setUpOperatorButtons();
         this.setUpEqualsButton();
+        this.addKeyboardSupport();
     }
 }
 
