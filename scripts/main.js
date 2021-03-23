@@ -50,11 +50,11 @@ class UserInterface {
         this.waitingForSecondNum = false;
     }
 
-    setUpClearButton() {
-        /**Adds event listener to #calc-clear-btn div. When such is clicked it
+    setUpAllClearButton() {
+        /**Adds event listener to #calc-ac-btn div. When such is clicked it
          * empties the calculator's display window and resets this.operator,
          * this.firstNum and this.waitingForSecondNum to default values.*/
-        const clearButton = document.getElementById('calc-clear-btn');
+        const clearButton = document.getElementById('calc-ac-btn');
         clearButton.addEventListener('click', () => {
             this.calcDisplay.textContent = '';
             this.operator = '';
@@ -63,10 +63,10 @@ class UserInterface {
         });
     }
 
-    setUpDeleteButton() {
-        /**Adds event listener to #calc-delete-btn div. If clicked it removes
+    setUpClearButton() {
+        /**Adds event listener to #calc-c-btn div. If clicked it removes
          * one character from calculator's display window. */
-        const deleteButton = document.getElementById('calc-delete-btn');
+        const deleteButton = document.getElementById('calc-c-btn');
         deleteButton.addEventListener('click', () => {
             const oldText = this.calcDisplay.textContent;
             const newText = oldText.substring(0, oldText.length - 1);
@@ -131,6 +131,15 @@ class UserInterface {
         });
     }
 
+    addClearButtonsKeyboardSupport(e) {
+        /**Adds keyboard support for clear buttons AC and C.*/
+        if (e.key === "Delete") {
+            document.getElementById("calc-ac-btn").click();
+        } else if (e.key === "Backspace") {
+            document.getElementById("calc-c-btn").click();
+        }
+    }
+
     addKeyboardSupport() {
         /**Adds keydown event listeners to body. If key pressed equal to text
          * content of button, simulate such button being clicked. */
@@ -139,16 +148,17 @@ class UserInterface {
             for (let i = 0; i < buttons.length; i++) {
                 if (e.key === buttons[i].textContent) {
                     buttons[i].click();
-                } 
+                }
             }
+            this.addClearButtonsKeyboardSupport(e);
         });
     }
 
     setUp() {
         /**Calls methods in UserInterface class associated with setting up
          * user interface.*/
+        this.setUpAllClearButton();
         this.setUpClearButton();
-        this.setUpDeleteButton();
         this.setUpInputButtons();
         this.setUpOperatorButtons();
         this.setUpEqualsButton();
