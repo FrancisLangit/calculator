@@ -131,6 +131,17 @@ class UserInterface {
         });
     }
 
+    addKeyboardSupport() {
+        document.body.addEventListener('keydown', (e) => {
+            const buttons = document.querySelectorAll('div.calc > div');
+            for (let i = 0; i < buttons.length; i++) {
+                if (e.key === buttons[i].textContent) {
+                    buttons[i].click();
+                } 
+            }
+        });
+    }
+
     setUp() {
         /**Calls methods in UserInterface class associated with setting up
          * buttons on calculator user interface.*/
@@ -139,6 +150,7 @@ class UserInterface {
         this.setUpInputButtons();
         this.setUpOperatorButtons();
         this.setUpEqualsButton();
+        this.addKeyboardSupport();
     }
 }
 
