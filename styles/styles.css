@@ -6,19 +6,15 @@
     padding: 20px;
 }
 
-.calc-bg {
-    background: grey;
-    height: 100%;
-}
-
 .calc div {
-    background: white;
     user-select: none;
 }
 
 .calc div:not(.calc-display) {
     align-items: center;
     display: flex;
+    font-family: 'Helvetica Neue', 'Open Sans', sans-serif;
+    font-size: 30px;
 }
 
 .calc div:not(.calc-display, .calc-zero-btn) {
@@ -32,10 +28,29 @@
     background: rgb(192, 192, 192);
 }
 
+.calc-ac-btn, .calc-c-btn, .calc-percent-btn {
+    background: #D4D4D2;
+}
+
+.calc-bg {
+    background: grey;
+    height: 100%;
+}
 
 .calc-display {
+    background: white;
     grid-column: 1 / 5;
     height: 50px;
+}
+
+.calc-input-btn {
+    background: #505050;
+    color: white;
+}
+
+.calc-operator-btn, .calc-equals-btn {
+    background: #FF9500;
+    color: white;
 }
 
 .calc-zero-btn {
