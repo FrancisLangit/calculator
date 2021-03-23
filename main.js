@@ -47,7 +47,6 @@ class UserInterface {
         
         this.operator = '';
         this.firstNum = '';
-        this.secondNum = '';
         this.waitingForSecondNum = false;
     }
 
@@ -72,8 +71,9 @@ class UserInterface {
     }
 
     setUpInputButtons() {
-        /**Adds event listener to .calc-input-btn divs. Such divs now add
-         * their text content to #calc-display div when clicked.*/
+        /**Adds event listeners to .calc-input-btn divs. Makes them add
+         * their text content to #calc-display div when clicked. Also clears
+         * display window before first digit of second number is inputted.*/
         const inputButtons = document.querySelectorAll('.calc-input-btn');
         for (let i = 0; i < inputButtons.length; i++) {
             inputButtons[i].addEventListener('click', () => {
@@ -87,39 +87,30 @@ class UserInterface {
     }
 
     displayResult() {
-        // this.calcDisplay.textContent = this.calculator.operate(
-        //     this.operator, 
-        //     parseFloat(this.firstNum), 
-        //     parseFloat(this.calcDisplay.textContent),
-        // );
-        // this.operator = '';
-        // this.firstNum = this.calcDisplay.textContent;
-        // this.waitingForSecondNum = true;
+        /**Calculates result of user input and displays such in calculator
+         * display window.*/
+        this.calcDisplay.textContent = this.calculator.operate(
+            this.operator,
+            parseFloat(this.firstNum),
+            parseFloat(this.calcDisplay.textContent),
+        );
     }
 
     setUpOperatorButtons() {
+        /**Adds event listeners to all divs with class .calc-operator-btn.
+         * When such are clicked calls this.displayResult() if this.firstNum
+         * already inputted and prepares calculator to anticipate 
+         * this.secondNum.*/
         const operatorButtons = document.querySelectorAll(
             '.calc-operator-btn');
         for (let i = 0; i < operatorButtons.length; i++) {
             operatorButtons[i].addEventListener('click', () => {
-                if (this.calcDisplay.textContent !== '') {
-                    if (this.firstNum === '') {
-                        this.operator = operatorButtons[i].textContent;
-                        this.firstNum = this.calcDisplay.textContent;
-                        this.waitingForSecondNum = true;
-                    } else if (this.firstNum !== '') {
-                        this.secondNum = this.calcDisplay.textContent;
-                        this.calcDisplay.textContent = this.calculator.operate(
-                            this.operator,
-                            parseFloat(this.firstNum),
-                            parseFloat(this.secondNum),
-                        );
-                        this.firstNum = this.calcDisplay.textContent;
-                        this.secondNum = '';
-                        this.waitingForSecondNum = true;
-                        this.operator = operatorButtons[i].textContent;
-                    }
+                if (this.firstNum !== '') {
+                    this.displayResult();
                 }
+                this.operator = operatorButtons[i].textContent;
+                this.firstNum = this.calcDisplay.textContent;
+                this.waitingForSecondNum = true;
             });
         }
     }
