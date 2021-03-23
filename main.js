@@ -52,10 +52,14 @@ class UserInterface {
 
     setUpClearButton() {
         /**Adds event listener to #calc-clear-btn div. When such is clicked it
-         * empties the calculator's display window. */
+         * empties the calculator's display window and resets this.operator,
+         * this.firstNum and this.waitingForSecondNum to default values.*/
         const clearButton = document.getElementById('calc-clear-btn');
         clearButton.addEventListener('click', () => {
             this.calcDisplay.textContent = '';
+            this.operator = '';
+            this.firstNum = '';
+            this.waitingForSecondNum = false;
         });
     }
 
