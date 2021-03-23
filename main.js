@@ -43,7 +43,7 @@ class Calculator {
 class UserInterface {
     constructor() {
         this.calculator = new Calculator;
-        this.calcDisplay = document.getElementById('calc-display'); 
+        this.calcDisplay = document.getElementById('calc-display');
         
         this.operator = '';
         this.firstNum = '';
@@ -116,11 +116,14 @@ class UserInterface {
     }
 
     setUpEqualsButton() {
+        /**Adds event listener to #calc-equals-btn div. Calls displayResult()
+         * if first number already inputted. Also resets this.firstNum.*/
         const equalsButton = document.getElementById("calc-equals-btn");
         equalsButton.addEventListener('click', () => {
-            // if (this.firstNum !== '') {
-            //     this.displayResult();
-            // }
+            if (this.firstNum !== '') {
+                this.displayResult();
+            }
+            this.firstNum = '';
         });
     }
 
