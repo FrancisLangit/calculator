@@ -50,8 +50,18 @@ class UserInterface {
         this.waitingForSecondNum = false;
     }
 
+    displayResult() {
+        /**Calculates result of user input and displays such in calculator
+         * display window.*/
+        this.calcDisplay.textContent = this.calculator.operate(
+            this.operator,
+            parseFloat(this.firstNum),
+            parseFloat(this.calcDisplay.textContent),
+        );
+    }
+
     setUpAllClearButton() {
-        /**Adds event listener to #calc-ac-btn div. When such is clicked it
+        /**Adds event listener to .calc-ac-btn div. When such is clicked it
          * empties the calculator's display window and resets this.operator,
          * this.firstNum and this.waitingForSecondNum to default values.*/
         const clearButton = document.getElementsByClassName('calc-ac-btn')[0];
@@ -64,19 +74,32 @@ class UserInterface {
     }
 
     setUpClearButton() {
-        /**Adds event listener to #calc-c-btn div. If clicked it removes
+        /**Adds event listener to .calc-c-btn div. If clicked it removes
          * one character from calculator's display window. */
         const deleteButton = document.getElementsByClassName('calc-c-btn')[0];
         deleteButton.addEventListener('click', () => {
-            const oldText = this.calcDisplay.textContent;
-            const newText = oldText.substring(0, oldText.length - 1);
-            this.calcDisplay.textContent = newText;
+            const oldNum = this.calcDisplay.textContent;
+            const newNum = oldNum.substring(0, oldNum.length - 1);
+            this.calcDisplay.textContent = newNum;
+        });
+    }
+
+    setUpPercentButton() {
+        /**Adds event listener to .calc-percent-btn div. When clicked, it
+         * it takes the number in the display window as a percentage and
+         * converts such into a decimal.*/
+        const percentButton = document.getElementsByClassName(
+            'calc-percent-btn')[0];
+        percentButton.addEventListener('click', ()  => {
+            const oldNum = parseFloat(this.calcDisplay.textContent);
+            const newNum = oldNum / 100;
+            this.calcDisplay.textContent = newNum;
         });
     }
 
     setUpInputButtons() {
         /**Adds event listeners to .calc-input-btn divs. Makes them add
-         * their text content to #calc-display div when clicked. Also clears
+         * their text content to .calc-display div when clicked. Also clears
          * display window before first digit of second number is inputted.*/
         const inputButtons = document.querySelectorAll('.calc-input-btn');
         for (let i = 0; i < inputButtons.length; i++) {
@@ -88,16 +111,6 @@ class UserInterface {
                 this.calcDisplay.textContent += inputButtons[i].textContent;
             });
         }
-    }
-
-    displayResult() {
-        /**Calculates result of user input and displays such in calculator
-         * display window.*/
-        this.calcDisplay.textContent = this.calculator.operate(
-            this.operator,
-            parseFloat(this.firstNum),
-            parseFloat(this.calcDisplay.textContent),
-        );
     }
 
     setUpOperatorButtons() {
@@ -120,7 +133,7 @@ class UserInterface {
     }
 
     setUpEqualsButton() {
-        /**Adds event listener to #calc-equals-btn div. Calls displayResult()
+        /**Adds event listener to .calc-equals-btn div. Calls displayResult()
          * if first number already inputted. Also resets this.firstNum.*/
         const equalsButton = document.getElementsByClassName(
             "calc-equals-btn")[0];
@@ -160,6 +173,7 @@ class UserInterface {
          * user interface.*/
         this.setUpAllClearButton();
         this.setUpClearButton();
+        this.setUpPercentButton();
         this.setUpInputButtons();
         this.setUpOperatorButtons();
         this.setUpEqualsButton();
