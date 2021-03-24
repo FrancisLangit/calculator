@@ -50,13 +50,21 @@ class UserInterface {
         this.waitingForSecondNum = false;
     }
 
+    resetDisplay() {
+        /**Resets calcDisplay text content and font-size and margin-top CSS 
+         * attributes to default values.*/
+        this.calcDisplay.textContent = "0";
+        this.calcDisplay.style.fontSize = "75px";
+        this.calcDisplay.style.marginTop = "100px";
+    }
+
     setUpAllClearButton() {
         /**Adds event listener to .calc-ac-btn div. When such is clicked it
          * empties the calculator's display window and resets this.operator,
          * this.firstNum and this.waitingForSecondNum to default values.*/
-        const clearButton = document.getElementsByClassName('calc-ac-btn')[0];
-        clearButton.addEventListener('click', () => {
-            this.calcDisplay.textContent = '0';
+        const allClearButton = document.getElementsByClassName('calc-ac-btn')[0];
+        allClearButton.addEventListener('click', () => {
+            this.resetDisplay();
             this.operator = '';
             this.firstNum = '';
             this.waitingForSecondNum = false;
@@ -67,10 +75,10 @@ class UserInterface {
         /**Adds event listener to .calc-c-btn div. If clicked it removes
          * one character from calculator's display window if such not just
          * displaying 0. */
-        const deleteButton = document.getElementsByClassName('calc-c-btn')[0];
-        deleteButton.addEventListener('click', () => {
+        const clearButton = document.getElementsByClassName('calc-c-btn')[0];
+        clearButton.addEventListener('click', () => {
             if (this.calcDisplay.textContent.length <= 1) {
-                this.calcDisplay.textContent = "0";
+                this.resetDisplay();
             } else if (this.calcDisplay.textContent !== '0') {
                 const oldNum = this.calcDisplay.textContent;
                 const newNum = oldNum.substring(0, oldNum.length - 1);
@@ -98,13 +106,10 @@ class UserInterface {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-    formatDisplay() {
+    formatDisplayWindow() {
         /**Makes font size of display window div smaller if and when its text
          * content get too large. Also adjusts top margin of such div 
          * accordingly.*/
-        this.calcDisplay.textContent = this.formatNumber(
-            this.calcDisplay.textContent);
-
         const calcDisplayStyles = getComputedStyle(this.calcDisplay);
 
         const calcDisplayFontSize = parseFloat(
@@ -118,7 +123,14 @@ class UserInterface {
         } 
     }
 
-    displayNewNum(inputChar) {
+    adjustDisplay() {
+        /**Formats number in display window and adjusts size of such.*/
+        this.calcDisplay.textContent = this.formatNumber(
+            this.calcDisplay.textContent);
+        this.formatDisplayWindow();
+    }
+
+    appendNum(inputChar) {
         /**Appends digit or decimal inputted by user to current number in 
          * display window. Also disallows multiple decimal points.*/
         let calcDisplayText = this.calcDisplay.textContent;
@@ -126,11 +138,10 @@ class UserInterface {
             let newNum = calcDisplayText + inputChar;
             if (newNum[0] === '0' && newNum.length >= 2) {
                 newNum = newNum.replace(/^0/, '');
-                console.log(newNum);
             }
             this.calcDisplay.textContent = newNum;
         }
-        this.formatDisplay();
+        this.adjustDisplay();
     }
 
     setUpInputButtons() {
@@ -144,7 +155,7 @@ class UserInterface {
                     this.calcDisplay.textContent = '';
                     this.waitingForSecondNum = false;
                 }
-                this.displayNewNum(inputButtons[i].textContent);
+                this.appendNum(inputButtons[i].textContent);
             });
         }
     }
