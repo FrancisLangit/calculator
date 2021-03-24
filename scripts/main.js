@@ -50,16 +50,6 @@ class UserInterface {
         this.waitingForSecondNum = false;
     }
 
-    displayResult() {
-        /**Calculates result of user input and displays such in calculator
-         * display window.*/
-        this.calcDisplay.textContent = this.calculator.operate(
-            this.operator,
-            parseFloat(this.firstNum),
-            parseFloat(this.calcDisplay.textContent),
-        );
-    }
-
     setUpAllClearButton() {
         /**Adds event listener to .calc-ac-btn div. When such is clicked it
          * empties the calculator's display window and resets this.operator,
@@ -100,6 +90,16 @@ class UserInterface {
         });
     }
 
+    displayNewNum(inputChar) {
+        /**Appends digit or decimal inputted by user to current number in 
+         * display window.*/
+        let newNum = this.calcDisplay.textContent + inputChar;
+        if (newNum[0] === '0' && newNum.length >= 2) {
+            newNum = newNum.replace(/^0/, '');
+        }
+        this.calcDisplay.textContent = newNum;
+    }
+
     setUpInputButtons() {
         /**Adds event listeners to .calc-input-btn divs. Makes them add
          * their text content to .calc-display div when clicked. Also clears
@@ -111,11 +111,19 @@ class UserInterface {
                     this.calcDisplay.textContent = '';
                     this.waitingForSecondNum = false;
                 }
-                const newNum = (this.calcDisplay.textContent + 
-                    inputButtons[i].textContent);
-                this.calcDisplay.textContent = newNum.replace(/^0+/, '');
+                this.displayNewNum(inputButtons[i].textContent);
             });
         }
+    }
+
+    displayResult() {
+        /**Calculates result of user input and displays such in calculator
+         * display window.*/
+        this.calcDisplay.textContent = this.calculator.operate(
+            this.operator,
+            parseFloat(this.firstNum),
+            parseFloat(this.calcDisplay.textContent),
+        );
     }
 
     setUpOperatorButtons() {
