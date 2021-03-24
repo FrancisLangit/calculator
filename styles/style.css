@@ -1,3 +1,13 @@
+/* @font-face {
+    font-family: "San Francisco Medium";
+    src: url("../fonts/SanFranciscoDisplay-Medium.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "San Francisco Ultra Light";
+    src: url("../fonts/SanFranciscoDisplay-Ultralight.otf") format("opentype");
+} */
+
 .calc {
     display: grid;
     grid-gap: 10px;
@@ -63,7 +73,7 @@
     padding-left: 30px;
 }
 
-.device-container{
-    display: flex;
-    justify-content: center;
+.header {
+    font-family: 'Roboto';
+    font-weight: 100;
 }

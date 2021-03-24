@@ -95,11 +95,12 @@ class CalculatorUserInterface {
          * 18 characters.*/
         let calcDisplayText = this.calcDisplay.textContent;
         
-        const multiDecimalBool = (
+        const isMultiDecimal = (
             inputChar === '.' && calcDisplayText.split(".").length >= 2);
-        const overMaxCharsBool = calcDisplayText.length > 16;
-
-        if (!multiDecimalBool && !overMaxCharsBool) {
+        const isOverMaxChars = calcDisplayText.length > 16;
+        const isInfinity = calcDisplayText === 'Infinity';
+        
+        if (!isMultiDecimal && !isOverMaxChars && !isInfinity) {
             let newNum = calcDisplayText + inputChar;
             if (newNum[0] === '0' && newNum.length >= 2) {
                 newNum = newNum.replace(/^0/, '');
