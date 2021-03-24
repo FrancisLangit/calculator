@@ -62,7 +62,8 @@ class UserInterface {
         /**Adds event listener to .calc-ac-btn div. When such is clicked it
          * empties the calculator's display window and resets this.operator,
          * this.firstNum and this.waitingForSecondNum to default values.*/
-        const allClearButton = document.getElementsByClassName('calc-ac-btn')[0];
+        const allClearButton = document.getElementsByClassName(
+            'calc-ac-btn')[0];
         allClearButton.addEventListener('click', () => {
             this.resetDisplay();
             this.operator = '';
@@ -132,16 +133,23 @@ class UserInterface {
 
     appendNum(inputChar) {
         /**Appends digit or decimal inputted by user to current number in 
-         * display window. Also disallows multiple decimal points.*/
+         * display window. Disallows multiple decimal points and doesn't 
+         * permit append if length of current calc display's text content over
+         * 18 characters.*/
         let calcDisplayText = this.calcDisplay.textContent;
-        if (!(inputChar === '.' && calcDisplayText.split(".").length >= 2)) {
+        
+        const multiDecimalBool = (
+            inputChar === '.' && calcDisplayText.split(".").length >= 2);
+        const overMaxCharsBool = calcDisplayText.length > 18;
+
+        if (!multiDecimalBool && !overMaxCharsBool) {
             let newNum = calcDisplayText + inputChar;
             if (newNum[0] === '0' && newNum.length >= 2) {
                 newNum = newNum.replace(/^0/, '');
             }
             this.calcDisplay.textContent = newNum;
+            this.adjustDisplay();
         }
-        this.adjustDisplay();
     }
 
     setUpInputButtons() {
