@@ -101,16 +101,22 @@ class UserInterface {
         });
     }
 
-    formatNumber(number) {
-        /**Adds commas to number given.*/
-        number = number.replace(/,/g, "");
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    formatNumber() {
+        /**Formats display number to exponential notation if and when its 
+         * length goes above 15 characters.*/
+        const calcDisplayText = this.calcDisplay.textContent;
+        if (calcDisplayText.length > 12) {
+            let newNum = Number.parseFloat(calcDisplayText).toExponential(3);
+            this.calcDisplay.textContent = newNum;
+        }
     }
 
     formatDisplayWindow() {
         /**Makes font size of display window div smaller if and when its text
          * content get too large. Also adjusts top margin of such div 
          * accordingly.*/
+        this.formatNumber(); 
+
         const calcDisplayStyles = getComputedStyle(this.calcDisplay);
 
         const calcDisplayFontSize = parseFloat(
@@ -119,16 +125,9 @@ class UserInterface {
             calcDisplayStyles.getPropertyValue('margin-top'));
 
         if (this.calcDisplay.clientWidth > 335) {
-            this.calcDisplay.style.fontSize = calcDisplayFontSize - 7.5;
-            this.calcDisplay.style.marginTop = calcDisplayMarginTop + 9;
+            this.calcDisplay.style.fontSize = calcDisplayFontSize - 7.5 * 2;
+            this.calcDisplay.style.marginTop = calcDisplayMarginTop + 9 * 2;
         } 
-    }
-
-    adjustDisplay() {
-        /**Formats number in display window and adjusts size of such.*/
-        this.calcDisplay.textContent = this.formatNumber(
-            this.calcDisplay.textContent);
-        this.formatDisplayWindow();
     }
 
     appendNum(inputChar) {
@@ -140,7 +139,7 @@ class UserInterface {
         
         const multiDecimalBool = (
             inputChar === '.' && calcDisplayText.split(".").length >= 2);
-        const overMaxCharsBool = calcDisplayText.length > 18;
+        const overMaxCharsBool = calcDisplayText.length > 16;
 
         if (!multiDecimalBool && !overMaxCharsBool) {
             let newNum = calcDisplayText + inputChar;
@@ -148,7 +147,7 @@ class UserInterface {
                 newNum = newNum.replace(/^0/, '');
             }
             this.calcDisplay.textContent = newNum;
-            this.adjustDisplay();
+            this.formatDisplayWindow();
         }
     }
 
@@ -176,6 +175,7 @@ class UserInterface {
             parseFloat(this.firstNum),
             parseFloat(this.calcDisplay.textContent),
         );
+        this.formatDisplayWindow();
     }
 
     setUpOperatorButtons() {
