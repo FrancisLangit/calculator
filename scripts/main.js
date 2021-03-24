@@ -69,7 +69,9 @@ class UserInterface {
          * displaying 0. */
         const deleteButton = document.getElementsByClassName('calc-c-btn')[0];
         deleteButton.addEventListener('click', () => {
-            if (this.calcDisplay.textContent !== '0') {
+            if (this.calcDisplay.textContent.length <= 1) {
+                this.calcDisplay.textContent = "0";
+            } else if (this.calcDisplay.textContent !== '0') {
                 const oldNum = this.calcDisplay.textContent;
                 const newNum = oldNum.substring(0, oldNum.length - 1);
                 this.calcDisplay.textContent = newNum;
@@ -90,6 +92,32 @@ class UserInterface {
         });
     }
 
+    formatNumber(number) {
+        /**Adds commas to number given.*/
+        number = number.replace(/,/g, "");
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    formatDisplay() {
+        /**Makes font size of display window div smaller if and when its text
+         * content get too large. Also adjusts top margin of such div 
+         * accordingly.*/
+        this.calcDisplay.textContent = this.formatNumber(
+            this.calcDisplay.textContent);
+
+        const calcDisplayStyles = getComputedStyle(this.calcDisplay);
+
+        const calcDisplayFontSize = parseFloat(
+            calcDisplayStyles.getPropertyValue('font-size'));
+        const calcDisplayMarginTop = parseFloat(
+            calcDisplayStyles.getPropertyValue('margin-top'));
+
+        if (this.calcDisplay.clientWidth > 335) {
+            this.calcDisplay.style.fontSize = calcDisplayFontSize - 7.5;
+            this.calcDisplay.style.marginTop = calcDisplayMarginTop + 9;
+        } 
+    }
+
     displayNewNum(inputChar) {
         /**Appends digit or decimal inputted by user to current number in 
          * display window. Also disallows multiple decimal points.*/
@@ -98,9 +126,11 @@ class UserInterface {
             let newNum = calcDisplayText + inputChar;
             if (newNum[0] === '0' && newNum.length >= 2) {
                 newNum = newNum.replace(/^0/, '');
+                console.log(newNum);
             }
             this.calcDisplay.textContent = newNum;
         }
+        this.formatDisplay();
     }
 
     setUpInputButtons() {
