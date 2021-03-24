@@ -1,46 +1,6 @@
-class Calculator {
-    add(a, b) {
-        /**Returns sum of a and b.*/
-        return a + b;
-    }
-    
-    subtract(a, b) {
-        /**Returns difference of a and b.*/
-        return a - b;
-    }
-    
-    multiply(a, b) {
-        /**Returns product of a and b.*/
-        return a * b;
-    }
-    
-    divide(a, b) {
-        /**Returns quotient of a and b.*/
-        return a / b;
-    }
+import Calculator from "./calculator.js";
 
-    operate(operator, a, b) {
-        /**Returns value after operating on a and b dependent on operator.*/
-        let result;
-        switch(operator) {
-            case '+':
-                result = this.add(a, b);
-                break;
-            case '-':
-                result = this.subtract(a, b);
-                break;
-            case '*':
-                result = this.multiply(a, b);
-                break;
-            case '/':
-                result = this.divide(a, b);
-                break;
-        }
-        return result;
-    }
-}
-
-class UserInterface {
+class CalculatorUserInterface {
     constructor() {
         this.calculator = new Calculator;
         this.calcDisplay = document.getElementsByClassName('calc-display')[0];
@@ -50,9 +10,9 @@ class UserInterface {
         this.waitingForSecondNum = false;
     }
 
-    resetDisplay() {
-        /**Resets calcDisplay text content and font-size and margin-top CSS 
-         * attributes to default values.*/
+    resetCalcDisplay() {
+        /**Resets calcDisplay text content as well as its font-size and 
+         * margin-top CSS attributes to default values.*/
         this.calcDisplay.textContent = "0";
         this.calcDisplay.style.fontSize = "75px";
         this.calcDisplay.style.marginTop = "100px";
@@ -65,7 +25,7 @@ class UserInterface {
         const allClearButton = document.getElementsByClassName(
             'calc-ac-btn')[0];
         allClearButton.addEventListener('click', () => {
-            this.resetDisplay();
+            this.resetCalcDisplay();
             this.operator = '';
             this.firstNum = '';
             this.waitingForSecondNum = false;
@@ -79,7 +39,7 @@ class UserInterface {
         const clearButton = document.getElementsByClassName('calc-c-btn')[0];
         clearButton.addEventListener('click', () => {
             if (this.calcDisplay.textContent.length <= 1) {
-                this.resetDisplay();
+                this.resetCalcDisplay();
             } else if (this.calcDisplay.textContent !== '0') {
                 const oldNum = this.calcDisplay.textContent;
                 const newNum = oldNum.substring(0, oldNum.length - 1);
@@ -101,7 +61,7 @@ class UserInterface {
         });
     }
 
-    formatNumber() {
+    formatDisplayNumber() {
         /**Formats display number to exponential notation if and when its 
          * length goes above 15 characters.*/
         const calcDisplayText = this.calcDisplay.textContent;
@@ -112,13 +72,11 @@ class UserInterface {
     }
 
     formatDisplayWindow() {
-        /**Makes font size of display window div smaller if and when its text
-         * content get too large. Also adjusts top margin of such div 
-         * accordingly.*/
-        this.formatNumber(); 
+        /**Makes font size of display window div smaller when its text content
+         * gets too large. Also adjusts top margin of such accordingly.*/
+        this.formatDisplayNumber();
 
         const calcDisplayStyles = getComputedStyle(this.calcDisplay);
-
         const calcDisplayFontSize = parseFloat(
             calcDisplayStyles.getPropertyValue('font-size'));
         const calcDisplayMarginTop = parseFloat(
@@ -234,8 +192,7 @@ class UserInterface {
     }
 
     setUp() {
-        /**Calls methods in UserInterface class associated with setting up
-         * user interface.*/
+        /**Calls methods in class associated with setting up user interface.*/
         this.setUpAllClearButton();
         this.setUpClearButton();
         this.setUpPercentButton();
@@ -246,5 +203,5 @@ class UserInterface {
     }
 }
 
-userInterface = new UserInterface;
-userInterface.setUp();
+const calculatorUserInterface = new CalculatorUserInterface;
+calculatorUserInterface.setUp();
