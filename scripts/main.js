@@ -92,12 +92,15 @@ class UserInterface {
 
     displayNewNum(inputChar) {
         /**Appends digit or decimal inputted by user to current number in 
-         * display window.*/
-        let newNum = this.calcDisplay.textContent + inputChar;
-        if (newNum[0] === '0' && newNum.length >= 2) {
-            newNum = newNum.replace(/^0/, '');
+         * display window. Also disallows multiple decimal points.*/
+        let calcDisplayText = this.calcDisplay.textContent;
+        if (!(inputChar === '.' && calcDisplayText.split(".").length >= 2)) {
+            let newNum = calcDisplayText + inputChar;
+            if (newNum[0] === '0' && newNum.length >= 2) {
+                newNum = newNum.replace(/^0/, '');
+            }
+            this.calcDisplay.textContent = newNum;
         }
-        this.calcDisplay.textContent = newNum;
     }
 
     setUpInputButtons() {
