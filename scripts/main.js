@@ -88,20 +88,26 @@ class CalculatorUserInterface {
         } 
     }
 
-    appendNum(inputChar) {
-        /**Appends digit or decimal inputted by user to current number in 
-         * display window. Disallows multiple decimal points and doesn't 
-         * permit append if length of current calc display's text content over
-         * 18 characters or if textContent of display is 'Infinity'.*/
-        let calcDisplayText = this.calcDisplay.textContent;
-        
+    canAppendNum(inputChar) {
+        /**Checks if logic of appendNum() should be run. Returns false if:
+         * - User tries to input multiple decimal points. 
+         * - textContent of display already at 16 characters,
+         * - textContent of display equal to 'Infinity'.*/
+        const calcDisplayText = this.calcDisplay.textContent;
+
         const isMultiDecimal = (
             inputChar === '.' && calcDisplayText.split(".").length >= 2);
-        const isOverMaxChars = calcDisplayText.length > 16;
-        const isInfinity = calcDisplayText === 'Infinity';
+        const isOverMaxChars = (calcDisplayText.length > 16);
+        const isInfinity = (calcDisplayText === 'Infinity');
 
-        if (!isMultiDecimal && !isOverMaxChars && !isInfinity) {
-            let newNum = calcDisplayText + inputChar;
+        return (!isMultiDecimal && !isOverMaxChars && !isInfinity);
+    }
+
+    appendNum(inputChar) {
+        /**Appends digit or decimal inputted by user to current number in 
+         * display window. Only does so if canAppendNum === true.*/
+        if (this.canAppendNum(inputChar)) {
+            let newNum = this.calcDisplay.textContent + inputChar;
             if (newNum[0] === '0' && newNum.length >= 2) {
                 newNum = newNum.replace(/^0/, '');
             }
