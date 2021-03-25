@@ -1,7 +1,9 @@
 export default class InputButtons {
+    /**Represents buttons that allower user to input either a number or a 
+     * decimal point.*/
     constructor(main) {
+        this.main = main;
         this.display = main.display;
-        this.waitingForSecondNum = main.waitingForSecondNum;
     }
 
     canAppendNum(inputChar) {
@@ -39,9 +41,9 @@ export default class InputButtons {
         const inputButtons = document.querySelectorAll('.calc-input-btn');
         for (let i = 0; i < inputButtons.length; i++) {
             inputButtons[i].addEventListener('click', () => {
-                if (this.waitingForSecondNum) {
+                if (this.main.waitingForSecondNum) {
                     this.display.div.textContent = '';
-                    this.waitingForSecondNum = false;
+                    this.main.waitingForSecondNum = false;
                 }
                 this.appendNum(inputButtons[i].textContent);
             });
