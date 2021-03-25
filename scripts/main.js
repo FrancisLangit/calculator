@@ -192,6 +192,29 @@ class CalculatorUserInterface {
         });
     }
 
+    addChangeColorSupport() {
+        const colors = ['black', 'silver', 'gold',];
+        const colorButtons = document.querySelectorAll('.color-btns > div');
+
+        for (let i = 0; i < colorButtons.length; i++) {
+            colorButtons[i].addEventListener('click', () => {
+                const newColor = colorButtons[i].getAttribute('name');
+
+                const device = document.getElementsByClassName('marvel-device')[0];
+
+                for (let i = 0; i < device.classList.length; i++) {
+                    if (colors.includes(device.classList[i])) {
+                        device.classList.remove(device.classList[i]);
+                    }
+                }
+        
+                device.classList.add(newColor);
+            })
+        }
+
+
+    }
+
     setUp() {
         /**Calls methods in class associated with setting up user interface.*/
         this.setUpAllClearButton();
@@ -201,6 +224,7 @@ class CalculatorUserInterface {
         this.setUpOperatorButtons();
         this.setUpEqualsButton();
         this.addKeyboardSupport();
+        this.addChangeColorSupport();
     }
 }
 

@@ -1,7 +1,32 @@
+.color-btns {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.color-btns div {
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    margin: 0 10px;
+}
+
+.color-btn-black {
+    background-color: #2c2b2c;
+}
+
+.color-btn-silver {
+    background-color: #f0f0f0;
+}
+
+.color-btn-gold {
+    background-color: #f1e2d0;
+}
+
 .device {
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 25px;
 }
 
 .calc {
