@@ -1,12 +1,14 @@
 import Calculator from "./calculator.js";
 
 import ColorButtons from "./objects/colorButtons.js";
+import KeyboardSupport from "./objects/keyboardSupport.js";
 
 class Main {
     constructor() {
         this.calculator = new Calculator;
 
         this.colorButtons = new ColorButtons;
+        this.keyboardSupport = new KeyboardSupport;
         this.calcDisplay = document.getElementsByClassName('calc-display')[0];
         
         this.operator = '';
@@ -179,32 +181,10 @@ class Main {
         });
     }
 
-    setUpClearButtonsKeyboardSupport(e) {
-        /**Adds keyboard support for clear buttons AC and C.*/
-        if (e.key === "Delete") {
-            document.getElementsByClassName("calc-ac-btn")[0].click();
-        } else if (e.key === "Backspace") {
-            document.getElementsByClassName("calc-c-btn")[0].click();
-        }
-    }
-
-    setUpKeyboardSupport() {
-        /**Adds keydown event listeners to body. If key pressed equal to text
-         * content of button, simulate such button being clicked. */
-        document.body.addEventListener('keydown', (e) => {
-            const buttons = document.querySelectorAll('div.calc > div');
-            for (let i = 0; i < buttons.length; i++) {
-                if (e.key === buttons[i].textContent) {
-                    buttons[i].click();
-                }
-            }
-            this.setUpClearButtonsKeyboardSupport(e);
-        });
-    }
-
     setUp() {
         /**Calls methods in class associated with setting up user interface.*/
         this.colorButtons.setUp();
+        this.keyboardSupport.setUp();
         
         this.setUpAllClearButton();
         this.setUpClearButton();
@@ -212,7 +192,6 @@ class Main {
         this.setUpInputButtons();
         this.setUpOperatorButtons();
         this.setUpEqualsButton();
-        this.setUpKeyboardSupport();
     }
 }
 

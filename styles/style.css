@@ -54,12 +54,12 @@
     font-size: 30px;
 }
 
-.calc div:not(.calc-display):active {
-    background: rgb(0, 140, 175);
-}
-
 .calc div:not(.calc-display):hover {
     background: rgb(84, 221, 255);
+}
+
+.calc div:not(.calc-display):active {
+    background: rgb(0, 140, 175);
 }
 
 .calc div:not(.calc-display, .calc-zero-btn) {
