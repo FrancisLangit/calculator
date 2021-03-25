@@ -46,6 +46,7 @@
     display: flex;
     font-family: sans-serif;
     user-select: none;
+    transition: background-color 0.5s;
 }
 
 .calc div:not(.calc-display) {
@@ -54,7 +55,11 @@
 }
 
 .calc div:not(.calc-display):active {
-    background: rgb(192, 192, 192);
+    background: rgb(0, 140, 175);
+}
+
+.calc div:not(.calc-display):hover {
+    background: rgb(84, 221, 255);
 }
 
 .calc div:not(.calc-display, .calc-zero-btn) {
