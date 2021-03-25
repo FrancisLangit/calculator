@@ -63,9 +63,9 @@ class CalculatorUserInterface {
 
     formatDisplayNumber() {
         /**Formats display number to exponential notation if and when its 
-         * length goes above 12 characters.*/
+         * length goes above 10 characters.*/
         const calcDisplayText = this.calcDisplay.textContent;
-        if (calcDisplayText.length > 12) {
+        if (calcDisplayText.length >= 10) {
             let newNum = Number.parseFloat(calcDisplayText).toExponential(3);
             this.calcDisplay.textContent = newNum;
         }
