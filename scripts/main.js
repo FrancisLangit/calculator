@@ -169,7 +169,7 @@ class CalculatorUserInterface {
         });
     }
 
-    addClearButtonsKeyboardSupport(e) {
+    setUpClearButtonsKeyboardSupport(e) {
         /**Adds keyboard support for clear buttons AC and C.*/
         if (e.key === "Delete") {
             document.getElementsByClassName("calc-ac-btn")[0].click();
@@ -178,7 +178,7 @@ class CalculatorUserInterface {
         }
     }
 
-    addKeyboardSupport() {
+    setUpKeyboardSupport() {
         /**Adds keydown event listeners to body. If key pressed equal to text
          * content of button, simulate such button being clicked. */
         document.body.addEventListener('keydown', (e) => {
@@ -188,31 +188,37 @@ class CalculatorUserInterface {
                     buttons[i].click();
                 }
             }
-            this.addClearButtonsKeyboardSupport(e);
+            this.setUpClearButtonsKeyboardSupport(e);
         });
     }
 
-    addChangeColorSupport() {
-        const colors = ['black', 'silver', 'gold',];
-        const colorButtons = document.querySelectorAll('.color-btns > div');
+    removeCurrentDeviceColor(device) {
+        /**Removes the current color class of device.*/
+        const availableDeviceColors = ['black', 'silver', 'gold'];
+        for (let i = 0; i < device.classList.length; i++) {
+            if (availableDeviceColors.includes(device.classList[i])) {
+                device.classList.remove(device.classList[i]);
+            }
+        }
+    }
 
+    changeDeviceColor(colorButton) {
+        /**Changes color of iPhone dependent on colorButton argument.*/
+        const newColor = colorButton.getAttribute('name');
+        const device = document.getElementsByClassName('marvel-device')[0];
+        this.removeCurrentDeviceColor(device);
+        device.classList.add(newColor);
+    }
+
+    setUpColorButtons() {
+        /**Adds event listeners to color buttons. Makes them change color of 
+         * iPhone if and when they are clicked.*/
+        const colorButtons = document.querySelectorAll('.color-btns > div');
         for (let i = 0; i < colorButtons.length; i++) {
             colorButtons[i].addEventListener('click', () => {
-                const newColor = colorButtons[i].getAttribute('name');
-
-                const device = document.getElementsByClassName('marvel-device')[0];
-
-                for (let i = 0; i < device.classList.length; i++) {
-                    if (colors.includes(device.classList[i])) {
-                        device.classList.remove(device.classList[i]);
-                    }
-                }
-        
-                device.classList.add(newColor);
+                this.changeDeviceColor(colorButtons[i]);
             })
         }
-
-
     }
 
     setUp() {
@@ -223,8 +229,8 @@ class CalculatorUserInterface {
         this.setUpInputButtons();
         this.setUpOperatorButtons();
         this.setUpEqualsButton();
-        this.addKeyboardSupport();
-        this.addChangeColorSupport();
+        this.setUpKeyboardSupport();
+        this.setUpColorButtons();
     }
 }
 
