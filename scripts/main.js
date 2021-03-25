@@ -3,17 +3,18 @@ import Calculator from "./calculator.js";
 import ColorButtons from "./objects/colorButtons.js";
 import DeletionButtons from "./objects/deletionButtons.js";
 import Display from "./objects/display.js";
+import InputButtons from "./objects/inputButtons.js";
 import KeyboardSupport from "./objects/keyboardSupport.js";
 
 
 class Main {
     constructor() {
-        // this.display = document.querySelectorAll('.calc-display')[0];
-
         this.calculator = new Calculator;
+        
         this.colorButtons = new ColorButtons;
         this.display = new Display(this);
         this.deletionButtons = new DeletionButtons(this);
+        this.inputButtons = new InputButtons(this);
 
         this.keyboardSupport = new KeyboardSupport;
 
@@ -33,50 +34,6 @@ class Main {
             const newNum = oldNum / 100;
             this.display.div.textContent = newNum;
         });
-    }
-
-    canAppendNum(inputChar) {
-        /**Checks if logic of appendNum() should be run. Returns false if:
-         * - User tries to input multiple decimal points. 
-         * - textContent of display already at 16 characters,
-         * - textContent of display equal to 'Infinity'.*/
-        const displayText = this.display.div.textContent;
-
-        const isMultiDecimal = (
-            inputChar === '.' && displayText.split(".").length >= 2);
-        const isOverMaxChars = (displayText.length > 16);
-        const isInfinity = (displayText === 'Infinity');
-
-        return (!isMultiDecimal && !isOverMaxChars && !isInfinity);
-    }
-
-    appendNum(inputChar) {
-        /**Appends digit or decimal inputted by user to current number in 
-         * display window. Only does so if canAppendNum === true.*/
-        if (this.canAppendNum(inputChar)) {
-            let newNum = this.display.div.textContent + inputChar;
-            if (newNum[0] === '0' && newNum.length >= 2) {
-                newNum = newNum.replace(/^0/, '');
-            }
-            this.display.div.textContent = newNum;
-            this.display.formatDiv();
-        }
-    }
-
-    setUpInputButtons() {
-        /**Adds event listeners to .calc-input-btn divs. Makes them add
-         * their text content to .calc-display div when clicked. Also clears
-         * display window before first digit of second number is inputted.*/
-        const inputButtons = document.querySelectorAll('.calc-input-btn');
-        for (let i = 0; i < inputButtons.length; i++) {
-            inputButtons[i].addEventListener('click', () => {
-                if (this.waitingForSecondNum) {
-                    this.display.div.textContent = '';
-                    this.waitingForSecondNum = false;
-                }
-                this.appendNum(inputButtons[i].textContent);
-            });
-        }
     }
 
     displayResult() {
@@ -126,10 +83,11 @@ class Main {
         /**Calls methods in class associated with setting up user interface.*/
         this.colorButtons.setUp();
         this.deletionButtons.setUp();
+        this.inputButtons.setUp()
+
         this.keyboardSupport.setUp();
         
         this.setUpPercentButton();
-        this.setUpInputButtons();
         this.setUpOperatorButtons();
         this.setUpEqualsButton();
     }

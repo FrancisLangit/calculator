@@ -1,4 +1,5 @@
 export default class Display {
+    /**Represents display window of calculator.*/
     constructor(main) {
         this.main = main;
         this.div = document.getElementsByClassName('calc-display')[0]; 
