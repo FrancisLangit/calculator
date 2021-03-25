@@ -63,7 +63,7 @@ class CalculatorUserInterface {
 
     formatDisplayNumber() {
         /**Formats display number to exponential notation if and when its 
-         * length goes above 15 characters.*/
+         * length goes above 12 characters.*/
         const calcDisplayText = this.calcDisplay.textContent;
         if (calcDisplayText.length > 12) {
             let newNum = Number.parseFloat(calcDisplayText).toExponential(3);
@@ -223,7 +223,7 @@ class CalculatorUserInterface {
         for (let i = 0; i < colorButtons.length; i++) {
             colorButtons[i].addEventListener('click', () => {
                 this.changeDeviceColor(colorButtons[i]);
-            })
+            });
         }
     }
 
