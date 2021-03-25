@@ -1,8 +1,12 @@
 import Calculator from "./calculator.js";
 
-class CalculatorUserInterface {
+import ColorButtons from "./objects/colorButtons.js";
+
+class Main {
     constructor() {
         this.calculator = new Calculator;
+
+        this.colorButtons = new ColorButtons;
         this.calcDisplay = document.getElementsByClassName('calc-display')[0];
         
         this.operator = '';
@@ -198,37 +202,10 @@ class CalculatorUserInterface {
         });
     }
 
-    removeCurrentDeviceColor(device) {
-        /**Removes the current color class of device.*/
-        const availableDeviceColors = ['black', 'silver', 'gold'];
-        for (let i = 0; i < device.classList.length; i++) {
-            if (availableDeviceColors.includes(device.classList[i])) {
-                device.classList.remove(device.classList[i]);
-            }
-        }
-    }
-
-    changeDeviceColor(colorButton) {
-        /**Changes color of iPhone dependent on colorButton argument.*/
-        const newColor = colorButton.getAttribute('name');
-        const device = document.getElementsByClassName('marvel-device')[0];
-        this.removeCurrentDeviceColor(device);
-        device.classList.add(newColor);
-    }
-
-    setUpColorButtons() {
-        /**Adds event listeners to color buttons. Makes them change color of 
-         * iPhone if and when they are clicked.*/
-        const colorButtons = document.querySelectorAll('.color-btns > div');
-        for (let i = 0; i < colorButtons.length; i++) {
-            colorButtons[i].addEventListener('click', () => {
-                this.changeDeviceColor(colorButtons[i]);
-            });
-        }
-    }
-
     setUp() {
         /**Calls methods in class associated with setting up user interface.*/
+        this.colorButtons.setUp();
+        
         this.setUpAllClearButton();
         this.setUpClearButton();
         this.setUpPercentButton();
@@ -236,9 +213,8 @@ class CalculatorUserInterface {
         this.setUpOperatorButtons();
         this.setUpEqualsButton();
         this.setUpKeyboardSupport();
-        this.setUpColorButtons();
     }
 }
 
-const calculatorUserInterface = new CalculatorUserInterface;
-calculatorUserInterface.setUp();
+const main = new Main;
+main.setUp();
