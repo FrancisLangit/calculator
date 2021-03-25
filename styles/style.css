@@ -1,12 +1,24 @@
-/* @font-face {
-    font-family: "San Francisco Medium";
-    src: url("../fonts/SanFranciscoDisplay-Medium.otf") format("opentype");
+.header {
+    font-family: 'Helvetica';
+    margin: 50px auto 25px auto;
+    text-align: center;
+    width: 500px;
 }
 
-@font-face {
-    font-family: "San Francisco Ultra Light";
-    src: url("../fonts/SanFranciscoDisplay-Ultralight.otf") format("opentype");
-} */
+.header-header {
+    font-size: 100px;
+    font-weight: 900;
+}
+
+.device {
+    display: flex;
+    justify-content: center;
+}
+
+.header-body {
+    color: rgb(115, 115, 115);
+    font-size: 20px;
+}
 
 .calc {
     display: grid;
@@ -18,7 +30,7 @@
 
 .calc div {
     display: flex;
-    font-family: 'Helvetica Neue', 'Open Sans', sans-serif;
+    font-family: sans-serif;
     user-select: none;
 }
 
@@ -73,7 +85,16 @@
     padding-left: 30px;
 }
 
-.header {
-    font-family: 'Roboto';
-    font-weight: 100;
+.footer {
+    font-family: "Helvetica";
+    margin: 35px auto 50px auto;
+    text-align: center;
+}
+
+.footer-text-license {
+    font-size: 30px;
+}
+
+.footer-text-copyright {
+    color: rgb(115, 115, 115);
 }

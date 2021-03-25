@@ -92,14 +92,14 @@ class CalculatorUserInterface {
         /**Appends digit or decimal inputted by user to current number in 
          * display window. Disallows multiple decimal points and doesn't 
          * permit append if length of current calc display's text content over
-         * 18 characters.*/
+         * 18 characters or if textContent of display is 'Infinity'.*/
         let calcDisplayText = this.calcDisplay.textContent;
         
         const isMultiDecimal = (
             inputChar === '.' && calcDisplayText.split(".").length >= 2);
         const isOverMaxChars = calcDisplayText.length > 16;
         const isInfinity = calcDisplayText === 'Infinity';
-        
+
         if (!isMultiDecimal && !isOverMaxChars && !isInfinity) {
             let newNum = calcDisplayText + inputChar;
             if (newNum[0] === '0' && newNum.length >= 2) {
