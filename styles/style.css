@@ -1,45 +1,7 @@
-.header {
-    font-family: 'Helvetica';
-    margin: 50px auto 35px auto;
-    text-align: center;
-    width: 500px;
-}
-
-.header-header {
-    font-size: 100px;
-    font-weight: 900;
-}
-
-.header-body {
-    font-size: 20px;
-}
-
-.header-body, .header-links a {
-    color: rgb(115, 115, 115);
-}
-
-.header-links {
-    margin-top: 20px;
-    font-size: 12.5px;
-}
-
-.header-links a {
-    border: 1px solid rgb(115, 115, 115); 
-    border-radius: 10px;
-    padding: 7.5px;
-    text-decoration: none;
-    margin: 0 5px;
-    transition: color 0.25s, background-color 0.25s;
-}
-
-.header-links a:hover, a:active {
-    background-color: rgb(115, 115, 115);
-    color: white
-}
-
 .device {
     display: flex;
     justify-content: center;
+    margin-top: 50px;
 }
 
 .calc {
@@ -61,15 +23,15 @@
     font-size: 30px;
 }
 
+.calc div:not(.calc-display):active {
+    background: rgb(192, 192, 192);
+}
+
 .calc div:not(.calc-display, .calc-zero-btn) {
     border-radius: 50%;
     height: 75px;
     justify-content: center;
     width: 75px;
-}
-
-.calc div:not(.calc-display):active {
-    background: rgb(192, 192, 192);
 }
 
 .calc-ac-btn, .calc-c-btn, .calc-percent-btn {
@@ -107,9 +69,54 @@
     padding-left: 30px;
 }
 
+.info {
+    font-family: 'Helvetica';
+    margin: 50px auto 50px auto;
+    text-align: center;
+    width: 500px;
+}
+
+.info-header {
+    font-size: 100px;
+    font-weight: 900;
+}
+
+.info-body {
+    font-size: 20px;
+}
+
+.info-body, .info-links a {
+    color: rgb(115, 115, 115);
+}
+
+.info-links {
+    margin-top: 20px;
+    font-size: 12.5px;
+}
+
+.info-links a {
+    border-radius: 10px;
+    border: 1px solid rgb(115, 115, 115); 
+    margin: 0 5px;
+    padding: 7.5px;
+    text-decoration: none;
+    transition: color 0.25s, background-color 0.25s;
+}
+
+.info-links a:hover, a:active {
+    background-color: rgb(115, 115, 115);
+    color: white
+}
+
+.info-footer-hr {
+    color: rgb(92, 92, 92);
+    margin: 0 auto;
+    width: 500px;
+}
+
 .footer {
     font-family: "Helvetica";
-    margin: 35px auto 50px auto;
+    margin: 50px auto 50px auto;
     text-align: center;
 }
 
