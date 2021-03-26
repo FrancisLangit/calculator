@@ -1,4 +1,4 @@
-![Banner](/home/francislangit/Desktop/calculator/readme_banner.png)
+![Banner](readme_banner.png)
 
 A light-weight web application simulating a basic version of the Apple iPhone calculator. Written on HTML, CSS, and vanilla JavaScript. [Made in partial completion of The Odin Project's Foundations path.](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/calculator)
 
@@ -13,7 +13,7 @@ For those that would like to utilize the repository locally, follow the steps be
 
 ## Usage
 
-![Demonstration GIF](/home/francislangit/Desktop/calculator/readme_usage_gif.gif)
+![Demonstration GIF](readme_usage_gif.gif)
 
 The web application can be used similarly to however one might use a basic calculator. Operator on numbers to your delight and configure the appearance of the device using to color buttons to its side. 
 
