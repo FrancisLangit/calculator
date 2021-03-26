@@ -1,0 +1,47 @@
+.info {
+    margin: 50px 0 50px 0;
+    text-align: center;
+    width: 500px;
+}
+
+.info-header {
+    font-size: 100px;
+    font-weight: 900;
+}
+
+.info-body {
+    color: rgb(115, 115, 115);
+    font-size: 20px;
+}
+
+.info-btns {
+    margin-bottom: 40px;
+}
+
+.info-btns a {
+    border-radius: 10px;
+    border: 1px solid rgb(115, 115, 115); 
+    color: rgb(115, 115, 115);
+    font-size: 12.5px;
+    margin: 0 5px;
+    padding: 7.5px;
+    text-decoration: none;
+    transition: color 0.25s, background-color 0.25s;
+}
+
+.info-btns a:hover, a:active {
+    background-color: rgb(115, 115, 115);
+    color: white
+}
+
+.info-divider {
+    margin: 50px 0 50px 0;
+}
+
+.info-license {
+    font-size: 30px;
+}
+
+.info-copyright {
+    color: rgb(115, 115, 115);
+}
