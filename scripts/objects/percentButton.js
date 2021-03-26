@@ -11,6 +11,7 @@ export default class PercentButton {
         const oldNum = parseFloat(this.display.div.textContent);
         const newNum = oldNum / 100;
         this.display.div.textContent = newNum;
+        this.display.formatDiv();
     }
 
     setUp() {

@@ -1,0 +1,16 @@
+@import 'objectStyles/calcStyle.scss';
+@import 'objectStyles/colorButtonsStyle.scss';
+@import 'objectStyles/infoSectionStyle.scss';
+
+body {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    font-family: 'Helvetica';
+    justify-content: center;
+    margin: 50px auto;
+}
+
+.user-interface {
+    display: flex;
+}
