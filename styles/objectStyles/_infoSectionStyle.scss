@@ -1,0 +1,47 @@
+.info {
+    margin: 50px 100px 0 100px;
+    text-align: right;
+    width: 500px;
+
+    &-header {
+        font-size: 100px;
+        font-weight: 900;
+    }
+    
+    &-body {
+        color: rgb(115, 115, 115);
+        font-size: 20px;
+    }
+    
+    &-btns {
+        margin-bottom: 40px;
+    }
+    
+    &-btns a {
+        border-radius: 10px;
+        border: 1px solid rgb(115, 115, 115); 
+        color: rgb(115, 115, 115);
+        font-size: 17px;
+        margin: 0 5px;
+        padding: 10px;
+        text-decoration: none;
+        transition: color 0.25s, background-color 0.25s;
+    }
+    
+    &-btns a:hover, a:active {
+        background-color: rgb(115, 115, 115);
+        color: white
+    }
+    
+    &-divider {
+        margin: 50px 0 50px 0;
+    }
+    
+    &-license {
+        font-size: 30px;
+    }
+    
+    &-copyright {
+        color: rgb(115, 115, 115);
+    }
+}
