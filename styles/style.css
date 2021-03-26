@@ -1,14 +1,25 @@
+body {
+    margin-top: 35px;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.user-interface {
+    display: flex;
+    margin: 10px 100px 0 100px;
+}
+
 .color-btns {
     display: flex;
-    justify-content: center;
-    margin-top: 60px;
 }
 
 .color-btns div {
     border-radius: 50%;
-    height: 30px;
-    width: 30px;
-    margin: 0 30px;
+    height: 35px;
+    width: 35px;
+    margin: 15px;
     transition: box-shadow 0.25s;
 }
 
@@ -31,7 +42,6 @@
 .device {
     display: flex;
     justify-content: center;
-    margin-top: 35px;
 }
 
 .calc {
@@ -104,9 +114,13 @@
     padding-left: 30px;
 }
 
+.about {
+    margin-top: 60px;
+}
+
 .info {
     font-family: 'Helvetica';
-    margin: 50px auto 50px auto;
+    margin: 0px auto 50px auto;
     text-align: center;
     width: 500px;
 }
