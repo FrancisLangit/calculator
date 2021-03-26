@@ -15,9 +15,9 @@ export default class Display {
 
     formatNumber() {
         /**Formats number in div to exponential notation if and when its
-         * length goes above 10 characters.*/
+         * length goes above 11 characters.*/
         const currentNum = this.div.textContent;
-        if (currentNum.length >= 10) {
+        if (currentNum.length >= 11) {
             const newNum = Number.parseFloat(currentNum).toExponential(3)
             this.div.textContent = newNum;
         }
@@ -33,8 +33,8 @@ export default class Display {
         const marginTop = parseFloat(styles.getPropertyValue('margin-top'));
 
         if (this.div.clientWidth > 335) {
-            this.div.style.fontSize = fontSize - 7.5 * 2;
-            this.div.style.marginTop = marginTop + 9 * 2;
+            this.div.style.fontSize = fontSize - 7.5 * 3;
+            this.div.style.marginTop = marginTop + 9 * 3;
         } 
     }
 }
