@@ -8,7 +8,7 @@ body {
     flex-wrap: wrap;
     font-family: 'Helvetica';
     justify-content: center;
-    margin-top: 50px;
+    margin: 50px auto;
 }
 
 .user-interface {
